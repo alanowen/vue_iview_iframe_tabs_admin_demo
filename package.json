@@ -1,0 +1,38 @@
+{
+  "name": "vue_multiple_iframe_tabs_admin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --open --inline --hot --config ./webpack.base.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.1.5",
+    "axios-mock-adapter": "^1.15.0",
+    "babel-loader": "^8.0.4",
+    "css-loader": "^1.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "iview-loader": "^1.2.2",
+    "mini-css-extract-plugin": "^0.4.4",
+    "mockjs": "^1.0.1-beta3",
+    "style-loader": "^0.23.1",
+    "vue-loader": "^15.4.2",
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  },
+  "dependencies": {
+    "@babel/preset-env": "^7.1.5",
+    "axios": "^0.18.0",
+    "file-loader": "^2.0.0",
+    "iview": "^3.1.5",
+    "url-loader": "^1.1.2",
+    "vue": "^2.5.17",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
+  }
+}
