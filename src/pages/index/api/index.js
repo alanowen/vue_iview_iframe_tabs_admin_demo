@@ -5,8 +5,8 @@ let login = () => {
     return util.ajax.post('/auth/login')
 }
 
-let getSysMenuList = () => {
-    return util.ajax.get('/sys/menu/list');
+let getSysMenuTree = () => {
+    return util.ajax.get('/sys/menu/tree');
 }
 
 let getSysPrivList = () => {
@@ -19,7 +19,7 @@ let getSysUser = () => {
 
 export default {
     login,
-    getSysMenuList,
+    getSysMenuTree,
     getSysPrivList,
     getSysUser
 }

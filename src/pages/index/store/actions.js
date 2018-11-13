@@ -6,7 +6,7 @@ import api from '../api'
 export default {
     getSysInitData(context) {
         let promise = new Promise((resolve, reject) => {
-            axios.all([api.getSysMenuList(), api.getSysPrivList()]).then(axios.spread((rep1, rep2) => {
+            axios.all([api.getSysMenuTree(), api.getSysPrivList()]).then(axios.spread((rep1, rep2) => {
                 context.commit('menuList', rep1.data)
                 context.commit('privList', rep2.data)
                 resolve()

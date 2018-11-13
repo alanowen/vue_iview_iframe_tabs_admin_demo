@@ -6,9 +6,8 @@ Vue.use(iView)
 
 import App from './App.vue'
 import router from './router'
-import '@mock'
-
 import store from  './store'
+import '@assets/style/base.css'
 
 if (window.sessionStorage.getItem('token')) {
     store.commit('token', window.sessionStorage.getItem('token'))

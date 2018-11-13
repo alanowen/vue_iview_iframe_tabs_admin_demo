@@ -1,59 +1,34 @@
-import MockAdapter from 'axios-mock-adapter'
+const jsonServer = require('json-server')
 
-import util from '@libs/util'
+const data = require('./db')
 
+const server = jsonServer.create()
+// const router = jsonServer.router('db.json')
+const middlewares = jsonServer.defaults()
 
-let mock = new MockAdapter(util.ajax)
+server.use(middlewares)
 
-mock.onPost('/auth/login').reply(200, {
-    token: 'token1234',
-    user: {
-        userName: '系统管理员',
-        userType: 1,
-        userId: 1
+// server.use(router)
+server.use(jsonServer.bodyParser)
+
+server.post('/auth/login', (req, res) => {
+    if (req.method === 'POST') {
+        res.jsonp(data.loginUser)
     }
 })
 
-mock.onGet('/sys/menu/list').reply(200, [
-        {
-            'menuLabel': '系统管理',
-            'menuIcon': '',
-            'menuId': 1,
-            'menuName': 'sysManage',
-            'children': [
-                {
-                    'menuLabel': '菜单管理',
-                    'menuIcon': '',
-                    'menuId': 2,
-                    'menuName': 'sysMenuManage',
-                    'menuUrl': 'systemMenuManage.html',
-                    'parentMenuId': 1
-                },  {
-                    'menuLabel': '权限管理',
-                    'menuIcon': '',
-                    'menuId': 3,
-                    'menuName': 'sysPrivManage',
-                    'menuUrl': 'systemPrivManage.html',
-                    'parentMenuId': 1
-                },  {
-                    'menuLabel': '用户管理',
-                    'menuIcon': '',
-                    'menuId': 4,
-                    'menuName': 'sysUserManage',
-                    'menuUrl': 'systemUserManage.html',
-                    'parentMenuId': 1
-                }
-            ]
-        }
-    ]
-)
-
-mock.onGet('/sys/priv/list').reply(200, {
-    data: []
+server.get('/sys/menu/tree', (req, res) => {
+    res.jsonp(data.menuTree)
 })
 
-mock.onGet('/sys/user').reply(200, {
-    data: []
+server.get('/sys/menu/list', (req, res) => {
+    res.jsonp(data.menuList)
 })
 
-export default mock
+server.get('/sys/priv/list', (req, res) => {
+    res.jsonp([])
+})
+
+server.listen(5000, () => {
+    console.log('JSON Server is running')
+})

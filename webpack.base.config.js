@@ -14,7 +14,7 @@ fs.open('./src/config/env.js', 'w', function(err, fd) {
 module.exports = {
     entry: {
         index: path.resolve(__dirname, './src/pages/index/main.js'),
-        systemMenuManage: path.resolve(__dirname, './src/pages/system_menu_manage/main.js'),
+        sysMenuManage: path.resolve(__dirname, './src/pages/sys_menu_manage/main.js'),
         vendor: path.resolve(__dirname, './src/vendor.js')
     },
     output: {
@@ -58,8 +58,8 @@ module.exports = {
 
          }),
         new HtmlWebpackPlugin({
-            filename: 'systemMenuManage.html',
-            chunks: ['systemMenuManage', 'vendor'],
+            filename: 'sysMenuManage.html',
+            chunks: ['sysMenuManage', 'vendor'],
             template: path.resolve(__dirname, './src/assets/template/tab_page.html')
         })
     ],
@@ -69,7 +69,7 @@ module.exports = {
         alias: {
             '@libs': path.resolve(__dirname, './src/libs'),
             '@components': path.resolve(__dirname, './src/components'),
-            '@mock': path.resolve(__dirname, './src/mock')
+            '@assets': path.resolve(__dirname, './src/assets'),
         }
     },
 
