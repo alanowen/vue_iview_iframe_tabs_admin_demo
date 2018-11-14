@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        <Button :style="{'margin-bottom': '5px'}" size="small" type="primary"  @click="() => this.$router.push({ name: 'Edit' })">添加</Button>
+        <Button icon="ios-add" :style="{'margin-bottom': '5px'}" size="small" type="primary"  @click="() => this.$router.push({ name: 'Edit' })">添加</Button>
         <Table :columns="columns" :data="sysMenuList"></Table>
     </div>
 </template>
@@ -40,8 +40,9 @@
                                         'margin-right': '2px'
                                     },
                                     props: {
-                                        type: 'primary',
-                                        size: 'small'
+                                        type: 'dashed',
+                                        size: 'small',
+                                        icon: 'ios-settings'
                                     },
                                     on: {
                                         click: () => {
@@ -56,8 +57,9 @@
                                 }, '编辑'),
                                 h('Button', {
                                     props: {
-                                        type: 'warning',
-                                        size: 'small'
+                                        type: 'dashed',
+                                        size: 'small',
+                                        icon: 'ios-trash'
                                     }
                                 }, '删除')
                             ])

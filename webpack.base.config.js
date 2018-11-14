@@ -6,15 +6,45 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
-fs.open('./src/config/env.js', 'w', function(err, fd) {
-    const buf = 'export default "development";';
-    fs.write(fd, buf, 0, buf.length, function(err, written, buffer) {})
-})
+function makeEntries(pagesFolder, targetFile='main.js') {
+
+    let entries = {}
+
+    fs.readdirSync(pagesFolder).forEach(file => {
+        let p = path.join(pagesFolder, file)
+        if (fs.lstatSync(p).isDirectory()) {
+            if (fs.readdirSync(p).includes(targetFile)) {
+                entries[file] = path.resolve(__dirname, p, targetFile)
+            }
+        }
+    })
+    return entries
+}
+
+function makeEntryHtmls(pagesFolder, targetFile='main.js', tamplate='./src/assets/template/tab_page.html', chunks=['vendor']) {
+    let entryHtmls = []
+
+    fs.readdirSync(pagesFolder).forEach(file => {
+        let p = path.join(pagesFolder, file)
+        if (fs.lstatSync(p).isDirectory()) {
+            if (fs.readdirSync(p).includes(targetFile)) {
+
+                entryHtmls.push(
+                    new HtmlWebpackPlugin({
+                        filename: `${file}.html`,
+                        chunks: [file, ...chunks],
+                        template: path.resolve(__dirname, tamplate)
+                    })
+                )
+            }
+        }
+    })
+    return entryHtmls
+}
 
 module.exports = {
     entry: {
-        index: path.resolve(__dirname, './src/pages/index/main.js'),
-        sysMenuManage: path.resolve(__dirname, './src/pages/sys_menu_manage/main.js'),
+        ...makeEntries('./src/pages/'),
         vendor: path.resolve(__dirname, './src/vendor.js')
     },
     output: {
@@ -44,24 +74,10 @@ module.exports = {
         ]
     },
 
-    devServer: {
-        contentBase: './dist',
-        historyApiFallback: true
-    },    
-
     plugins: [
         new VueLoaderPlugin(),
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            chunks: ['index', 'vendor'],
-            template: path.resolve(__dirname, './src/assets/template/index.html')
 
-         }),
-        new HtmlWebpackPlugin({
-            filename: 'sysMenuManage.html',
-            chunks: ['sysMenuManage', 'vendor'],
-            template: path.resolve(__dirname, './src/assets/template/tab_page.html')
-        })
+        ...makeEntryHtmls('./src/pages')
     ],
 
     resolve: {
@@ -71,7 +87,5 @@ module.exports = {
             '@components': path.resolve(__dirname, './src/components'),
             '@assets': path.resolve(__dirname, './src/assets'),
         }
-    },
-
-    mode: 'development'
+    }
 }

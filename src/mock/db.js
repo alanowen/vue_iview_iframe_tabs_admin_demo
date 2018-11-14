@@ -13,21 +13,21 @@ let menuList = [
         'menuIcon': '',
         'menuId': 2,
         'menuName': 'sysMenuManage',
-        'menuUrl': 'sysMenuManage.html',
+        'menuUrl': 'sys_menu_manage.html',
         'parentMenuId': 1
     },  {
         'menuLabel': '权限管理',
         'menuIcon': '',
         'menuId': 3,
         'menuName': 'sysPrivManage',
-        'menuUrl': 'sysPrivManage.html',
+        'menuUrl': 'sys_priv_manage.html',
         'parentMenuId': 1
     },  {
         'menuLabel': '用户管理',
         'menuIcon': '',
         'menuId': 4,
         'menuName': 'sysUserManage',
-        'menuUrl': 'sysUserManage.html',
+        'menuUrl': 'sys_user_manage.html',
         'parentMenuId': 1
     }
 ]

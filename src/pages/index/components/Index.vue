@@ -11,6 +11,9 @@
         <Layout :style="{height: '100%' }">
             <Header>
                 <Menu mode="horizontal" theme="dark">
+                    <div style="float:right">
+                        <Avatar icon="ios-person" />
+                    </div>
                 </Menu>
             </Header>
             <Layout :style="{height: '100%' }">
